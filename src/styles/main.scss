@@ -1,0 +1,41 @@
+@import "../styles/variable";
+*, *:after, *:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Arial Rounded MT Bold";
+  font-weight: 500;
+}
+#app {
+  height: 100%;
+}
+html, body {
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  width: 75%;
+  margin: 0 auto;
+}
+.good {
+  color: forestgreen;
+}
+.danger {
+  color: $errorColor;
+}
+.modal-backdrop {
+  position: fixed;
+  background-color: black;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  .wrapper {
+    width: 90%;
+  }
+}
