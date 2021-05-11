@@ -1,46 +1,47 @@
 <template>
-  <div class="calculator-wrapper">
+  <div class="calculator wrapper">
     <input type="text" placeholder="0" disabled :value="result" class="input-result">
-    <div class="panel-wrapper">
-      <div class="geometry-panel">
-        <input type="button" value="sin" @click="result = countSin(result)">
-        <input type="button" value="cos" @click="result = countCos(result)">
-        <input type="button" value="tan" @click="result = countTan(result)">
-        <input type="button" value="asin" @click="result = Math.asin(result)">
-        <input type="button" value="acos" @click="result = Math.acos(result)">
-        <input type="button" value="atan" @click="result = Math.atan(result)">
-        <input type="button" value="sinH" @click="result = Math.sinh(result)">
-        <input type="button" value="cosH" @click="result = Math.cosh(result)">
-        <input type="button" value="tanH" @click="result = Math.tanh(result)">
-        <input type="button" value="asinH" @click="result = Math.asinh(result)">
-        <input type="button" value="acosH" @click="result = Math.acosh(result)">
-        <input type="button" value="atanH" @click="result = Math.atanh(result)">
-        <input type="button" value="Rand" @click="result = Math.random()">
-        <input type="button" value="&#960;" @click="result = 3.141592653589793">
-        <input type="button" value="e" @click="result = 2.718281828459045">
-      </div>
-      <div class="left-panel">
-        <input type="button" value="&#8730;" @click="squareRoot">
-        <input type="button" value="&#8731;" @click="cubicRoot">
-        <input type="button" @click="toDegree2" value="x2">
-        <input type="button" @click="toDegree3" value="x3">
-        <input type="button" value="x!" @click="result = factorial(result)">
-      </div>
-      <div class="main-panel">
-        <input type="button" value="Del" @click="delValue" class="main-operation">
-        <input type="button" @click="reset" value="C" class="main-operation">
-        <input type="button" value="+/-" @click="switcherAdd">
-        <input type="button" v-for="num in numbers" :value="num" @click="addValue(num)">
-        <input type="button" value="." @click="addPoint" :disabled="point">
-        <input type="button" @click="calc" value="=" class="main-operation">
-      </div>
-      <div class="right-panel">
-        <input type="button" value="%" @click="countPercent">
-        <input type="button" value="/" @click="divide" :disabled="operationActive">
-        <input type="button" value="*" @click="multi" :disabled="operationActive">
-        <input type="button" value="-" @click="minus" :disabled="operationActive">
-        <input type="button" value="+" @click="plus" :disabled="operationActive">
-      </div>
+    <div class="calculator-panel">
+      <input type="button" value="sin" @click="result = Math.sin(result)">
+      <input type="button" value="cos" @click="result = Math.cos(result)">
+      <input type="button" value="tan" @click="result = Math.tan(result)">
+      <input type="button" value="&#8730;" @click="squareRoot">
+      <input type="button" value="Del" @click="delValue" class="main-operation">
+      <input type="button" @click="reset" value="C" class="main-operation">
+      <input type="button" value="+/-" @click="switcherAdd" class="main-operation">
+      <input type="button" value="%" @click="countPercent" class="main-operation">
+      <input type="button" value="asin" @click="result = Math.asin(result)">
+      <input type="button" value="acos" @click="result = Math.acos(result)">
+      <input type="button" value="atan" @click="result = Math.atan(result)">
+      <input type="button" value="&#8731;" @click="cubicRoot">
+      <input type="button" value="7" @click="addValue('7')">
+      <input type="button" value="8" @click="addValue('8')">
+      <input type="button" value="9" @click="addValue('9')">
+      <input type="button" value="/" @click="divide" :disabled="operationActive" class="main-operation">
+      <input type="button" value="sinH" @click="result = Math.sinh(result)">
+      <input type="button" value="cosH" @click="result = Math.cosh(result)">
+      <input type="button" value="tanH" @click="result = Math.tanh(result)">
+      <input type="button" @click="toDegree2" value="x2">
+      <input type="button" value="4" @click="addValue('4')">
+      <input type="button" value="5" @click="addValue('5')">
+      <input type="button" value="6" @click="addValue('6')">
+      <input type="button" value="*" @click="multi" :disabled="operationActive" class="main-operation">
+      <input type="button" value="asinH" @click="result = Math.asinh(result)">
+      <input type="button" value="acosH" @click="result = Math.acosh(result)">
+      <input type="button" value="atanH" @click="result = Math.atanh(result)">
+      <input type="button" @click="toDegree3" value="x3">
+      <input type="button" value="1" @click="addValue('1')">
+      <input type="button" value="2" @click="addValue('2')">
+      <input type="button" value="3" @click="addValue('3')">
+      <input type="button" value="-" @click="minus" :disabled="operationActive" class="main-operation">
+      <input type="button" value="Rand" @click="result = Math.random()">
+      <input type="button" value="&#960;" @click="result = 3.141592653589793">
+      <input type="button" value="e" @click="result = 2.718281828459045">
+      <input type="button" value="x!" @click="result = factorial(result)">
+      <input type="button" value="0" @click="addValue('0')">
+      <input type="button" value="." @click="addPoint" :disabled="point">
+      <input type="button" @click="calc" value="=" class="main-operation">
+      <input type="button" value="+" @click="plus" :disabled="operationActive" class="main-operation">
     </div>
   </div>
 </template>
@@ -49,7 +50,6 @@
 export default {
   data() {
     return {
-      numbers: [7,8,9,4,5,6,1,2,3,0],
       result: '',
       prev: '',
       operation: '',
@@ -127,15 +127,6 @@ export default {
     toDegree3() {
       this.result = this.result ** 3
     },
-    countSin(n) {
-      return Math.sin(n)
-    },
-    countCos(n) {
-      return Math.cos(n)
-    },
-    countTan(n) {
-      return Math.tan(n)
-    },
     addPoint() {
       this.result += '.'
       this.point = true
@@ -191,73 +182,45 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/variable";
-input {
-  outline: none;
-  border: 0;
-  text-align: center;
-  font-size: 18px;
-  background-color: #222222;
-  color: white;
-  cursor: pointer;
-  padding: 11px;
-}
-.input-result {
-  width: 534px;
-  text-align: end;
-  font-size: 25px;
-  background-color: #f0f0f0;
-  color: black;
-  cursor: auto;
-}
-.calculator-wrapper {
-  width: 535px;
-  margin: 0 auto;
-}
-input:hover {
-  background-color: #454140;
-}
-.input-result:hover {
-  background-color: #f0f0f0;
-}
-.panel-wrapper {
-  display: flex;
-}
-.geometry-panel {
-  display: flex;
-  flex-wrap: wrap;
-  width: 200px;
-}
-.geometry-panel input {
-  width: 33.33333%;
-}
-.top-panel input {
-  width: 33.33333%;
-}
-.left-panel {
+.calculator.wrapper {
+  width: 35%;
   display: flex;
   flex-direction: column;
+  .input-result {
+    padding: 5px;
+    text-align: end;
+    font-size: 18px;
+  }
+  .calculator-panel {
+    display: flex;
+    flex-wrap: wrap;
+    .main-operation {
+      color: tomato;
+    }
+    input {
+      width: 12.5%;
+      padding: 10px 0;
+      outline: none;
+      border: none;
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      &:hover {
+        cursor: pointer;
+        background-color: #444444;
+        color: $yellowButton;
+      }
+    }
+  }
 }
-.left-panel input {
-  width: 67px;
-}
-.main-panel {
-  width: 200px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.main-panel input {
-  width: 33.33333%;
-}
-.right-panel {
-  display: flex;
-  flex-direction: column;
-}
-.right-panel input {
-  width: 67px;
-  height: 42.50px;
-  color: $yellowButton;
-}
-.main-operation {
-  color: $yellowButton;
+@media (max-width: 768px) {
+  .calculator.wrapper {
+    width: 90%;
+    .calculator-panel {
+      input {
+        font-size: 12px;
+      }
+    }
+  }
 }
 </style>

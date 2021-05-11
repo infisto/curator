@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import axios from "axios";
 import {error} from '@/errors/error'
 import myAxios from "@/axios/myAxios";
+import firebase from "firebase";
+import db from '../main'
 
 export default createStore({
   state() {
@@ -11,7 +13,9 @@ export default createStore({
       localId: localStorage.getItem('localId') ? localStorage.getItem('localId') : null,
       requests: [],
       templates: [],
-      todoList: []
+      todoList: [],
+      userName: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+      chatMessages: []
     }
   },
   getters: {
@@ -32,6 +36,14 @@ export default createStore({
     },
     localId(state) {
       return state.localId
+    },
+    userName(state) {
+      return state.userName
+    },
+    chatMessages(state) {
+      return state.chatMessages.sort((a,b) => {
+        return a.createdAt - b.createdAt
+      })
     }
   },
   mutations: {
@@ -43,6 +55,7 @@ export default createStore({
       state.token = null
       state.localId = null
       localStorage.removeItem('jwt-token')
+      localStorage.removeItem('userName')
     },
     setMessage(state, message) {
       state.message = message
@@ -71,6 +84,16 @@ export default createStore({
     setLocalId(state, localId) {
       state.localId = localId
       localStorage.setItem('localId', localId)
+    },
+    setUserName(state, userName) {
+      state.userName = userName
+      localStorage.setItem('userName', userName)
+    },
+    setChatMessages(state, chatMessages) {
+      state.chatMessages = chatMessages
+    },
+    addChatMessages(state, chatMessages) {
+      state.chatMessages.push(chatMessages)
     }
   },
   actions: {
@@ -252,7 +275,6 @@ export default createStore({
         const token = this.getters.token
         const localId = this.getters.localId
         const {data} = await myAxios.post(`/${localId}/todoList.json?auth=${token}`, payload)
-        console.log(data)
         commit('addTodoList', {...payload, id: data.name})
       } catch (e) {
         dispatch('setMessage', {
@@ -280,7 +302,44 @@ export default createStore({
           type: 'danger'
         })
       }
+    },
+    async createChatMessage({commit, dispatch}, payload) {
+      try {
+        const addZero = (value) => {
+          if (value < 10) {
+            value = `0${value}`
+          }
+          return value
+        }
+        const username = this.getters.userName
+        const date = `${addZero(new Date().getDate())}.${addZero(new Date().getMonth() + 1)}.${new Date().getFullYear()}`
+        const minutes = `${new Date().getHours()}:${new Date().getMinutes()}`
+        await db.collection('messages').add({
+          text: payload,
+          date,
+          minutes,
+          username,
+          createdAt: new Date().getTime()
+        }).then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        }).catch(e => console.log(e))
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async loadChatMessages({commit}) {
+      try {
+        db.collection("messages")
+            .onSnapshot((querySnapshot) => {
+              let messages = [];
+              querySnapshot.forEach((doc) => {
+                messages.push(doc.data());
+              });
+              commit('setChatMessages', messages)
+            });
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
-
 })

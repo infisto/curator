@@ -38,7 +38,7 @@
         <div class="AppWeather-content-footer">
           <!-- 8 боксов для информации -->
           <div class="appWeather-content-footer-wrapper">
-            <div class="appWeather-content-footer-wrapper-box" v-for="data in weatherData">
+            <div class="appWeather-content-footer-wrapper-box" v-for="data in weatherData" :key="data">
               <div><img :src="`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`" alt="" class="icon-weather"></div>
               <p>{{data.dt_txt.slice(5,10)}}</p>
               <p>{{data.dt_txt.slice(10)}}</p>
@@ -63,7 +63,7 @@
       <h2>Max: {{maxTemp}}&deg; Min: {{minTemp}}&deg;</h2>
     </div>
     <div class="appWeather-content-footer-wrapper">
-      <div class="appWeather-content-footer-wrapper-box" v-for="data in weatherData">
+      <div class="appWeather-content-footer-wrapper-box" v-for="data in weatherData" :key="data">
         <div><img :src="`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`" alt="" class="icon-weather"></div>
         <p>{{data.dt_txt.slice(5,10)}}</p>
         <p>{{data.dt_txt.slice(10)}}</p>

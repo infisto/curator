@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <nav class="wrapper">
-      <div :class="['header-nav-backdrop',{'nav-backdrop': activeBurger}]"></div>
+      <div :class="['header-nav-backdrop',{'nav-backdrop': activeBurger}]" @click="activeBurger = false"></div>
       <div class="header-logo">
         <svg :class="['ham', 'hamRotate', 'ham1', {'activate': activeBurger}]" viewBox="0 0 100 100" width="50" @click="activating">
           <path
@@ -30,6 +30,9 @@
         <li>
           <router-link to="/weather" @click="activeBurger = false">Weather</router-link>
         </li>
+        <li>
+          <router-link to="/chat" @click="activeBurger = false">Chat</router-link>
+        </li>
       </ul>
       <span class="header-logout">
           <router-link to="/" @click="logout">Logout</router-link>
@@ -53,7 +56,7 @@ export default {
       },
       activating() {
         activeBurger.value = !activeBurger.value
-      }
+      },
     }
   }
 }
@@ -123,32 +126,32 @@ justify-content: space-between;
 @media (max-width: 768px) {
   .header {
     background-color: $navBackgroundColor;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
   }
   .ham.hamRotate.ham1 {
     display: inline-block;
     &.activate {
-      transform: translateX(280px) rotate(45deg);
+      transform: rotate(45deg);
       z-index: 1001;
     }
   }
   .header-nav-ul {
-    position: fixed;
+    position: absolute;
+    z-index: 11000;
+    display: flex;
     flex-direction: column;
-    background-color: white;
-    height: 100%;
-    width: 380px;
-    transform: translateX(-420px);
+    top: 48px;
+    left: 0;
     transition: 0.5s;
-    li:nth-child(1) {
-      margin-top: 40px;
-    }
-    li {
-      border-bottom: 1px solid $navLiColor;
-      margin: 0 20px 0 30px;
-    }
+    width: 100%;
+    height: 300px;
+    background-color: $navBackgroundColor;
+    transform: translateY(-340px);
     &.activate {
-      transform: translateX(-45px);
-      z-index: 1000;
+      transform: translateY(0);
+      position: fixed;
     }
   }
   .header-logout {
@@ -166,8 +169,6 @@ justify-content: space-between;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: black;
-      opacity: 0.4;
   }
 }
 .ham {

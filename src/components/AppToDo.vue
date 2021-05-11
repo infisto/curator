@@ -1,16 +1,19 @@
 <template>
   <div class="organizer">
+    <AppToDoNotes></AppToDoNotes>
     <button class="accordion" @click="toggleClass">Калькулятор</button>
     <div class="panel">
       <Calculator class="calculator"></Calculator>
     </div>
-    <button class="accordion" @click="toggleClass">Мои заметки</button>
+    <button class="accordion" @click="toggleClass">Section 2</button>
     <div class="panel">
-      <AppToDoNotes></AppToDoNotes>
+      В разработке...
     </div>
     <button class="accordion" @click="toggleClass">Section 3</button>
     <div class="panel">
+      В разработке...
     </div>
+
   </div>
 </template>
 

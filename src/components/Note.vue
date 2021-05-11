@@ -11,7 +11,7 @@ export default {
   props: ['inputValue', 'id'],
   data() {
     return {
-      read: false
+      read: false,
     }
   },
   methods: {
@@ -20,7 +20,6 @@ export default {
     },
     completed() {
       this.read = !this.read
-      console.log(this.read)
     },
   },
 }

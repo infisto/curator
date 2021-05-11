@@ -34,6 +34,19 @@ html, body {
   height: 100%;
   opacity: 0.5;
 }
+.search {
+  padding: 14px;
+  border: none;
+  background-color: $darkGrey;
+  color: $navLiColor;
+  outline: none;
+  font-size: 16px;
+  &:active, &:hover {
+    background-color: white;
+    border: 1px solid $darkGrey;
+    margin: -1px;
+  }
+}
 @media (max-width: 768px) {
   .wrapper {
     width: 90%;

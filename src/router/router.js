@@ -8,6 +8,7 @@ import AppRegistration from "@/components/AppRegistration";
 import AppRequests from "@/components/AppRequests";
 import NotFound404 from "@/components/NotFound404";
 import AppResetPassword from "@/components/AppResetPassword";
+import Chat from "../components/Chat";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -31,6 +32,14 @@ const router = createRouter({
         {
             path: '/weather',
             component: AppWeather,
+            meta: {
+                layout: 'main',
+                auth: true
+            }
+        },
+        {
+            path: '/chat',
+            component: Chat,
             meta: {
                 layout: 'main',
                 auth: true

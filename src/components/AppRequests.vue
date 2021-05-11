@@ -163,16 +163,5 @@ export default {
       margin-bottom: 5px;
     }
   }
-  .search {
-    padding: 15px;
-    border: none;
-    background-color: $darkGrey;
-    outline: none;
-    &:active, &:hover {
-      background-color: white;
-      border: 1px solid $darkGrey;
-      margin: -1px;
-    }
-  }
 }
 </style>

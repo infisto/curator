@@ -8,7 +8,7 @@
     <section class="templates-search">
       <input type="text" v-model="inputValue" placeholder="Поиск совпадений" class="search">
       <select v-model="status" class="search">
-        <option v-for="(value, index) in textMap" :value="index">{{value}}</option>
+        <option v-for="(value, index) in textMap" :value="index" :key="index">{{value}}</option>
       </select>
     </section>
     <spinner v-if="loading"></spinner>
@@ -45,7 +45,7 @@ import Spinner from "@/components/spinner";
 export default {
   setup() {
     const textMap = {
-      all: 'Категория обращений',
+      all: 'Все категории',
       abort: 'Отмена обращений',
       close: 'Закрытие обращений',
       update: 'Уточнение информации',
@@ -107,20 +107,9 @@ export default {
     }
   }
   .templates-search {
+    display: flex;
     margin: 35px 0 20px 0;
-    text-align: center;
-    .search {
-      padding: 20px;
-      border: none;
-      flex: 1;
-      background-color: $darkGrey;
-      outline: none;
-      &:active, &:hover {
-        background-color: white;
-        border: 1px solid $darkGrey;
-        margin: -1px;
-      }
-    }
+    justify-content: center;
   }
   .table {
     width: 100%;
@@ -159,5 +148,14 @@ export default {
     background: $darkGrey!important;
   }
 }
-
+@media (max-width: 768px) {
+  .templates-search {
+    .search {
+      width: 100%;
+      &:active, &:hover {
+        
+      }
+    }
+  }
+}
 </style>

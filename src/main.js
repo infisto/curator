@@ -19,7 +19,9 @@ const firebaseConfig = {
     appId: "1:419613182253:web:212edf6d289d6c9773aba4"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
+let db = firebase.firestore()
+export default db
 
 let app
 firebase.auth().onAuthStateChanged(() => {
@@ -27,7 +29,6 @@ firebase.auth().onAuthStateChanged(() => {
         createApp(App).use(store).use(router).mount('#app')
     }
 })
-
 
 
 

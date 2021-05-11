@@ -35,6 +35,7 @@ export default {
       let inputValue = this.inputValue
       if (inputValue) {
         await store.dispatch('createTodoList', {inputValue})
+        this.inputValue = ''
       }
     },
     async deleteTodoList(id) {

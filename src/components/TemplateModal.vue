@@ -66,7 +66,7 @@ export default {
     display: flex;
     flex-direction: column;
     .yellow-button {
-      margin: 5px 75px 15px;
+      margin: 5px 26% 15px;
     }
   }
   h2 {
