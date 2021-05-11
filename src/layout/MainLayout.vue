@@ -28,9 +28,13 @@ export default {
 <style>
 main {
   flex: 1 0 auto;
-  margin-top: 40px;
 }
 footer {
   flex: 0 0 auto;
+}
+@media (max-width: 768px) {
+  main {
+    margin-top: 40px;
+  }
 }
 </style>

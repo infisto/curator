@@ -12,5 +12,6 @@
   box-shadow: 2px 2px 0px 0px $darkGrey;
   &:hover, &:active {
     box-shadow: none;
+    cursor: pointer;
   }
 }
